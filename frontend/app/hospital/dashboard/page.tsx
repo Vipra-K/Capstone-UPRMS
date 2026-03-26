@@ -12,13 +12,18 @@ import AIPatientSummary from "./components/AIPatientSummary";
 import AuditLogs from "./components/AuditLogs";
 import DoctorManagement from "./components/DoctorManagement";
 import CreateDoctorTab from "./components/CreateDoctorTab";
+import PatientList from "./components/PatientList";
 
-type Tab = "overview" | "search" | "upload" | "timeline" | "ai" | "audit" | "doctors" | "create_doctor";
+type Tab = "overview" | "patients" | "search" | "upload" | "timeline" | "ai" | "audit" | "doctors" | "create_doctor";
 
 const TABS: { id: Tab; label: string; icon: React.ReactElement; color: string }[] = [
     {
         id: "overview", label: "Dashboard Overview", color: "#3b82f6",
         icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /></svg>,
+    },
+    {
+        id: "patients", label: "Linked Patients", color: "#3b82f6",
+        icon: <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>,
     },
     {
         id: "search", label: "Patient Search & Access", color: "#8b5cf6",
@@ -52,6 +57,7 @@ const TABS: { id: Tab; label: string; icon: React.ReactElement; color: string }[
 
 const TAB_META: Record<Tab, { title: string; subtitle: string }> = {
     overview: { title: "Dashboard Overview", subtitle: "Hospital profile, key statistics, and recent activity" },
+    patients: { title: "Linked Patients", subtitle: "View and manage patients who have authorized your hospital" },
     search: { title: "Patient Search & Access", subtitle: "Search patients and manage access permissions" },
     upload: { title: "Upload Medical Record", subtitle: "Create new medical entries for patients who have granted access" },
     timeline: { title: "Patient Timeline", subtitle: "View chronological health history for authorized patients" },
@@ -240,6 +246,7 @@ export default function HospitalDashboard() {
                         {activeTab === "overview" && profile && stats && (
                             <HospitalProfileCard profile={profile} stats={stats} onProfileUpdate={fetchProfileAndStats} />
                         )}
+                        {activeTab === "patients" && <PatientList />}
                         {activeTab === "search" && <PatientSearch />}
                         {activeTab === "upload" && <UploadRecordForm onUploadSuccess={() => setActiveTab("timeline")} />}
                         {activeTab === "timeline" && <HospitalTimelineView />}

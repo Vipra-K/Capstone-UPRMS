@@ -92,6 +92,60 @@ export class HospitalService {
         return { totalPatients, totalRecords, recentActivity };
     }
 
+    // ── Get authorized patients ─────────────────────────────────────────────
+    async getPatients(userId: number) {
+        const hospital = await this.prisma.hospital.findUnique({ where: { userId } });
+        if (!hospital) throw new NotFoundException('Hospital not found');
+
+        const hospitalId = hospital.id;
+
+        const authorizedPatients = await this.prisma.accessPermission.findMany({
+            where: { hospitalId, status: 'APPROVED' },
+            include: {
+                patient: {
+                    select: {
+                        id: true,
+                        fullName: true,
+                        dateOfBirth: true,
+                        gender: true,
+                        user: { select: { phone: true } },
+                        assignments: {
+                            select: {
+                                isEmergency: true,
+                                doctor: {
+                                    select: {
+                                        fullName: true,
+                                        specialization: true,
+                                        hospitalId: true,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            orderBy: { patient: { fullName: 'asc' } },
+        });
+
+        return authorizedPatients.map((ap) => {
+            const assignment = ap.patient.assignments[0]; // strictly one because of @unique patientId
+            return {
+                id: ap.patient.id,
+                fullName: ap.patient.fullName,
+                dateOfBirth: ap.patient.dateOfBirth,
+                gender: ap.patient.gender,
+                phone: ap.patient.user.phone,
+                grantedAt: ap.updatedAt,
+                assignedDoctor: assignment ? {
+                    fullName: assignment.doctor.fullName,
+                    specialization: assignment.doctor.specialization,
+                    isEmergency: assignment.isEmergency,
+                    isSameHospital: assignment.doctor.hospitalId === hospitalId,
+                } : null,
+            };
+        });
+    }
+
     // ── Register patient (by hospital, auto temp password) ───────────────────
     async registerPatient(
         hospitalUserId: number,

@@ -38,6 +38,12 @@ export class HospitalController {
         return this.hospitalService.getAuditLog(req.user.userId);
     }
 
+    @Get('patients')
+    @Roles('HOSPITAL')
+    getPatients(@Request() req) {
+        return this.hospitalService.getPatients(req.user.userId);
+    }
+
     @Post('patients')
     @Roles('HOSPITAL')
     registerPatient(

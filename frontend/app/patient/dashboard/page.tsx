@@ -10,7 +10,6 @@ import Analytics from "./components/Analytics";
 import DocumentVault from "./components/DocumentVault";
 import AccessManager from "./components/AccessManager";
 import ChatBotEmbed from "./components/ChatBotEmbed";
-import PatientInsurance from "./components/PatientInsurance";
 import { 
     LuFileClock, 
     LuZap, 
@@ -27,7 +26,7 @@ import {
     LuUser
 } from "react-icons/lu";
 
-type Tab = "timeline" | "profile" | "analytics" | "vault" | "access" | "insurance";
+type Tab = "timeline" | "profile" | "analytics" | "vault" | "access" ;
 
 const TABS: { id: Tab; label: string; icon: React.ReactElement; color: string }[] = [
     {
@@ -49,11 +48,7 @@ const TABS: { id: Tab; label: string; icon: React.ReactElement; color: string }[
     {
         id: "access", label: "Hospital Access", color: "#E74C3C",
         icon: <LuShield size={18} />,
-    },
-    {
-        id: "insurance", label: "Insurance", color: "#22c55e",
-        icon: <LuShieldPlus size={18} />,
-    },
+    }
 ];
 
 const TAB_META: Record<Tab, { title: string; subtitle: string }> = {
@@ -62,8 +57,7 @@ const TAB_META: Record<Tab, { title: string; subtitle: string }> = {
     analytics: { title: "Health Analytics", subtitle: "Statistical overview and trends in your medical history" },
     vault: { title: "Document Vault", subtitle: "Secure repository for your medical reports and prescriptions" },
     access: { title: "Hospital Access Manager", subtitle: "Control which healthcare providers can access your records" },
-    insurance: { title: "Health Insurance", subtitle: "Manage your health insurance coverage for hospital billing" },
-};
+ };
 
 export default function PatientDashboard() {
     const router = useRouter();
@@ -252,7 +246,6 @@ export default function PatientDashboard() {
                         {activeTab === "analytics" && <Analytics records={records} />}
                         {activeTab === "vault" && <DocumentVault records={records} />}
                         {activeTab === "access" && <AccessManager hospitals={hospitals} permissions={permissions} onRefresh={fetchAll} />}
-                        {activeTab === "insurance" && <PatientInsurance />}
                     </div>
                 </main>
             </div>
