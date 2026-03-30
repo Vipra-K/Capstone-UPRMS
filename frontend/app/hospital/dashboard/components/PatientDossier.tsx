@@ -225,7 +225,7 @@ export default function PatientDossier({ patient, onClose }: { patient: Patient,
                                         <div className="spinner" />
                                         <div style={{ textAlign: "center" }}>
                                             <div style={{ fontWeight: 800, color: "#fff", fontSize: "1.2rem" }}>Analyzing Clinical History</div>
-                                            <div style={{ color: "#64748b", marginTop: 4 }}>Gemini AI is processing medical findings...</div>
+                                            <div style={{ color: "#64748b", marginTop: 4 }}>AI is processing medical findings...</div>
                                         </div>
                                     </div>
                                 ) : ai ? (

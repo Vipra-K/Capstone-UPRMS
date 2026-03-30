@@ -5,6 +5,9 @@ export async function POST(req: Request) {
         const body = await req.json();
         const { records } = body;
         const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) {
+            return NextResponse.json({ error: "AI API KEY is not defined in environment" }, { status: 500 });
+        }
 
         if (!records || !Array.isArray(records)) {
             return NextResponse.json({ error: "Invalid records provided" }, { status: 400 });
@@ -28,7 +31,8 @@ export async function POST(req: Request) {
         }
 
         const prompt = `
-You are a senior clinical AI assistant. Analyze these medical records and return a RAW VALID JSON summary. 
+You are a senior clinical AI assistant. Analyze these medical records, focusing on BOTH "diagnosis" and "prescription" fields. 
+Return a RAW VALID JSON summary. 
 NO markdown, NO backticks.
 
 Schema:
@@ -41,6 +45,7 @@ Schema:
   "importantTreatments": [{ "rank": number, "treatment": string, "date": string, "reason": string, "severity": string }],
   "rankedRecords": [{ "recordId": number, "visitDate": string, "diagnosis": string, "hospital": string, "importanceScore": number, "importanceReason": string, "severityTag": string, "prescription": string }],
   "topMeds": [[string, number]],
+  "prescriptionInsights": [{ "medication": string, "dosage": string, "frequency": string, "purpose": string, "possibleSideEffects": string }],
   "essentialFindings": string[],
   "suggestions": string[],
   "treatmentHistory": [{ "date": string, "treatment": string, "medicines": string[], "isSurgery": boolean }],
@@ -51,13 +56,16 @@ Records:
 ${JSON.stringify(records, null, 2)}
 `;
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "x-goog-api-key": apiKey
+            },
             body: JSON.stringify({
                 contents: [{ parts: [{ text: prompt }] }],
                 generationConfig: {
-                    response_mime_type: "application/json"
+                    responseMimeType: "application/json"
                 }
             })
         });
@@ -65,8 +73,8 @@ ${JSON.stringify(records, null, 2)}
         const result = await response.json();
         
         if (!response.ok) {
-            console.error("Gemini API Error:", result);
-            throw new Error(result.error?.message || "Gemini API failure");
+            console.error("AI API Error:", result);
+            throw new Error(result.error?.message || "AI API failure");
         }
 
         const text = result.candidates?.[0]?.content?.parts?.[0]?.text || "{}";

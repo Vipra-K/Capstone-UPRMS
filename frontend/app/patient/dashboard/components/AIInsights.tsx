@@ -53,7 +53,7 @@ export default function AIInsights({ records }: Props) {
                 }
             })
             .catch(err => {
-                console.error("Gemini AI Error:", err);
+                console.error("AI Error:", err);
                 if (isMounted) setLoadingAi(false);
             });
 
@@ -83,7 +83,7 @@ export default function AIInsights({ records }: Props) {
             {/* AI disclaimer */}
             <div style={{ background: "rgba(255, 255, 255, 1)", border: "1px solid rgba(59, 130, 246, 0.2)", borderRadius: 8, padding: "12px 16px", fontSize: "0.85rem", color: "#93c5fd", display: "flex", alignItems: "center", gap: 12 }}>
                 <LuInfo size={20} />
-                AI insights are derived from your medical record history by Gemini. Not a substitute for professional medical advice.
+                AI insights are derived from your medical record history by AI. Not a substitute for professional medical advice.
             </div>
 
             {/* Top row: Health Score + Risk Level */}

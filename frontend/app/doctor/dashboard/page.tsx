@@ -74,7 +74,7 @@ const TAB_META: Record<Tab, { title: string; subtitle: string }> = {
     search: { title: "Patient Search", subtitle: "Search patients by name, phone, Aadhaar or ID" },
     assigned: { title: "Assigned Patients", subtitle: "Patients assigned to you by your hospital admin" },
     records: { title: "Record Viewer", subtitle: "View complete medical history for patients who have granted access" },
-    ai: { title: "AI Medical Summary", subtitle: "Gemini AI clinical overview — chronic conditions, risk indicators, medication patterns" },
+    ai: { title: "AI Medical Summary", subtitle: "AI clinical overview — chronic conditions, risk indicators, medication patterns" },
     timeline: { title: "Smart Timeline", subtitle: "Year-wise health history with surgery, critical and recurring illness markers" },
     schedule: { title: "Schedule & Availability", subtitle: "Set working hours, mark leave days, and view your real-time availability" },
     activity: { title: "Activity Log", subtitle: "Full audit trail of your patient record access and downloads" },

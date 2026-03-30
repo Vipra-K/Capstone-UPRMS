@@ -9,7 +9,7 @@ interface LogEntry {
     patientId: number;
     action: string;
     detail: string | null;
-    timestamp: string;
+    createdAt: string;
     isOutsideWorkHours: boolean;
     patient?: { fullName: string };
 }
@@ -66,7 +66,7 @@ export default function DoctorActivityLog() {
                                 onMouseOut={e => (e.currentTarget.style.background = rowBg)}>
                                 <div style={{ fontSize: "0.8rem", color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: 6 }}>
                                     {log.isOutsideWorkHours && <span title="Access outside working hours" style={{ fontSize: "0.85rem" }}>⚠️</span>}
-                                    {new Date(log.timestamp).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                                    {new Date(log.createdAt).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
                                 </div>
                                 <div style={{ fontSize: "0.88rem", color: "#e2e8f0", fontWeight: 500 }}>
                                     {log.patient?.fullName || `Patient #${log.patientId}`}

@@ -79,7 +79,7 @@ const TAB_META: Record<Tab, { title: string; subtitle: string }> = {
     overview: { title: "Dashboard Overview", subtitle: "Hospital profile, key statistics, and recent activity" },
     find_patient: { title: "Find New Patient", subtitle: "Enter Patient Registration Number to request access" },
     search: { title: "My Patients", subtitle: "View and manage patients currently linked to your hospital" },
-    ai_summary: { title: "AI Clinical Intelligence", subtitle: "Gemini AI analyzes all patient records — surgeries, ranked history, and treatment recommendations" },
+    ai_summary: { title: "AI Clinical Intelligence", subtitle: "AI analyzes all patient records — surgeries, ranked history, and treatment recommendations" },
     assign_patient: { title: "Assign Patient to Doctor", subtitle: "Link authorized patients to medical staff for consultation" },
     upload: { title: "Upload Medical Record", subtitle: "Create new medical entries for patients who have granted access" },
     timeline: { title: "Patient Timeline", subtitle: "View chronological health history for authorized patients" },

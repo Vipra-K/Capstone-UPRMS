@@ -23,7 +23,7 @@ const FEATURES = [
     {
         icon: <LuBot />,
         title: "AI-Powered Insights",
-        desc: "Gemini AI clinical summaries, risk scores & predictive analytics",
+        desc: "AI clinical summaries, risk scores & predictive analytics",
     },
     {
         icon: <LuFileText />,

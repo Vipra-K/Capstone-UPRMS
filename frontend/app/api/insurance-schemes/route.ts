@@ -70,7 +70,7 @@ Ensure all URLs are real, working government or official company websites.
 
         return NextResponse.json(data);
     } catch (error: any) {
-        console.error("Gemini Insurance API Error:", error);
+        console.error("AI Insurance API Error:", error);
         return NextResponse.json(
             { error: "Failed to fetch insurance schemes: " + error.message },
             { status: 500 }

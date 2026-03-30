@@ -61,7 +61,7 @@ const TAB_META: Record<Tab, { title: string; subtitle: string }> = {
     search: { title: "Patient Search & Access", subtitle: "Search patients and manage access permissions" },
     upload: { title: "Upload Medical Record", subtitle: "Create new medical entries for patients who have granted access" },
     timeline: { title: "Patient Timeline", subtitle: "View chronological health history for authorized patients" },
-    ai: { title: "AI Health Assistant", subtitle: "Generate clinical summaries and risk analysis using Gemini AI" },
+    ai: { title: "AI Health Assistant", subtitle: "Generate clinical summaries and risk analysis using AI" },
     audit: { title: "Audit Logs", subtitle: "Track record uploads and access requests made by this hospital" },
     doctors: { title: "Doctor Management", subtitle: "Register, manage, and monitor doctors in your hospital" },
     create_doctor: { title: "Create Doctor Account", subtitle: "Register a new doctor and assign them to your hospital" },

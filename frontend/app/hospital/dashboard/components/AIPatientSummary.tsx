@@ -137,7 +137,7 @@ export default function AIPatientSummary() {
             .then(res => res.json())
             .then(data => { if (isMounted) { setAi(data); setLoadingAi(false); } })
             .catch(err => {
-                console.error("Gemini AI Error:", err);
+                console.error("AI Error:", err);
                 if (isMounted) { setError("AI analysis failed. Please try again."); setLoadingAi(false); }
             });
 
@@ -168,7 +168,7 @@ export default function AIPatientSummary() {
                     }}>🧠</div>
                     <div>
                         <div style={{ fontWeight: 800, fontSize: "1.2rem", color: "#fff" }}>
-                            Gemini AI Clinical Intelligence
+                            AI Clinical Intelligence
                         </div>
                         <div style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", marginTop: 2 }}>
                             Full patient history analysis · Surgeries · Ranked records · Doctor recommendations
@@ -220,7 +220,7 @@ export default function AIPatientSummary() {
                         boxShadow: "0 0 30px rgba(59,130,246,0.2)"
                     }}>🧠</div>
                     <div style={{ color: "#93c5fd", fontWeight: 700, fontSize: "1.1rem", marginBottom: 8 }}>
-                        {loadingRecords ? "Fetching patient records…" : "Gemini AI is analyzing the full clinical history…"}
+                        {loadingRecords ? "Fetching patient records…" : "AI is analyzing the full clinical history…"}
                     </div>
                     <div style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.85rem" }}>
                         {loadingAi && `Analyzing ${records.length} medical record${records.length !== 1 ? "s" : ""} for ${selectedName}`}
@@ -443,7 +443,7 @@ export default function AIPatientSummary() {
                     {activeTab === "records" && (
                         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                             <div style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.4)", marginBottom: 4 }}>
-                                Records are sorted from most clinically important (score 10) to routine (score 1) by Gemini AI.
+                                Records are sorted from most clinically important (score 10) to routine (score 1) by AI.
                             </div>
                             {ai.rankedRecords?.map((rec, i) => {
                                 const cfg = SEVERITY_CONFIG[rec.severityTag] || SEVERITY_CONFIG.routine;
@@ -599,7 +599,7 @@ export default function AIPatientSummary() {
                     <div style={{ fontSize: "3rem", marginBottom: 16 }}>🧠</div>
                     <div style={{ fontWeight: 700, fontSize: "1.1rem", color: "#fff", marginBottom: 8 }}>Select a Patient to Begin AI Analysis</div>
                     <div style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.9rem", maxWidth: 400, margin: "0 auto" }}>
-                        Gemini AI will analyze the complete medical history and generate a clinical intelligence report including surgeries, ranked records, and treatment recommendations.
+                        AI will analyze the complete medical history and generate a clinical intelligence report including surgeries, ranked records, and treatment recommendations.
                     </div>
                 </div>
             )}
